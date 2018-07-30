@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         String cod = edx_codigo.getText().toString();
         Cursor fila = db.rawQuery("select descripcion_art, precio_art" +
-                "from articulo where codigo_art="+cod,null);
+                "from articulo where codigo_art="+cod,null      );
 
     }
 }
