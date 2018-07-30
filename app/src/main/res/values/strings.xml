@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FerreteriaSQLite</string>
+    <string name="hint_codigo">Código</string>
+    <string name="precio">Precio</string>
+    <string name="hint_descripcion">Descripción</string>
+    <string name="grabar">Grabar</string>
+    <string name="consultar_descripcion">Consultar Descripción</string>
+    <string name="consultar_codigo">Consultar Código</string>
+    <string name="eliminar">Eliminar</string>
+</resources>

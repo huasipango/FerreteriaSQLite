@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.labctr.ferreteriasqlite.MainActivity">
+
+    <EditText
+        android:id="@+id/ed_codigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_codigo"/>
+    <EditText
+        android:id="@+id/ed_descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_descripcion"/>
+    <EditText
+        android:id="@+id/ed_precio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/precio"
+        android:inputType="number"/>
+
+        <Button
+            android:id="@+id/bt_grabar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/grabar"/>
+
+        <Button
+            android:id="@+id/bt_consulCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/consultar_codigo"/>
+
+        <Button
+            android:id="@+id/bt_consulDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/consultar_descripcion"/>
+
+        <Button
+            android:id="@+id/bt_eliminar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eliminar"/>
+
+
+
+
+</android.widget.LinearLayout>
