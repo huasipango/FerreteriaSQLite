@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_consulCodigo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                consultarCodigo();
+            }
+        });
+
+        btn_consulDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                consultarDescripcion();
+            }
+        });
+
+        btn_eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eliminarDato();
+                consultarCodigo();
+            }
+        });
+
     }
 
     private void grabarDatos() {
@@ -52,8 +75,11 @@ public class MainActivity extends AppCompatActivity {
         registro.put("precio_art", pre);
 
         db.insert("articulo",null,registro);
+        Toast.makeText(getApplicationContext(),"Registro exitoso.",Toast.LENGTH_LONG).show();
         db.close();
     }
+
+
 
     private void consultarCodigo(){
         AdminSqlHelper admin = new AdminSqlHelper(getApplicationContext(),
@@ -61,8 +87,60 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = admin.getWritableDatabase();
 
         String cod = edx_codigo.getText().toString();
-        Cursor fila = db.rawQuery("select descripcion_art, precio_art" +
-                "from articulo where codigo_art="+cod,null      );
+        Cursor fila = db.rawQuery("select descripcion_art, precio_art " +
+                "from articulo where codigo_art='"+cod+"'",null);
+
+        if (fila.moveToFirst()){
+            edx_descripcion.setText(fila.getString(0).toString());
+            edx_precio.setText(fila.getString(1).toString());
+            Toast.makeText(getApplicationContext(),"Encuentra.",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(),"No se encontró ese artículo.",
+                    Toast.LENGTH_LONG).show();
+        }
+        db.close();
+    }
+
+    private void consultarDescripcion(){
+        AdminSqlHelper admin = new AdminSqlHelper(getApplicationContext(),
+                "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        String des = edx_descripcion.getText().toString();
+        Cursor fila = db.rawQuery("select codigo_art, precio_art " +
+                "from articulo where descripcion_art='"+des+"'",null);
+
+        if (fila.moveToFirst()){
+            edx_codigo.setText(fila.getString(0).toString());
+            edx_precio.setText(fila.getString(1).toString());
+            Toast.makeText(getApplicationContext(),"Encuentra.",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(),"No se encontró ese artículo.",
+                    Toast.LENGTH_LONG).show();
+        }
+        db.close();
+    }
+
+    private void eliminarDato() {
+        AdminSqlHelper admin = new AdminSqlHelper(getApplicationContext(),
+                "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        String cod = edx_codigo.getText().toString();
+
+        int delete = db.delete("articulo","codigo_art='"+cod+"'",null);
+
+        if (delete==1)
+        {
+            Toast.makeText(getApplicationContext(),"Eliminado.",
+                    Toast.LENGTH_LONG).show();
+        }else
+        {
+            Toast.makeText(getApplicationContext(),"No se eliminó ese artículo.",
+                    Toast.LENGTH_LONG).show();
+        }
 
     }
 }
