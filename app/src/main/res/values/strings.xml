@@ -7,4 +7,5 @@
     <string name="consultar_descripcion">Consultar Descripción</string>
     <string name="consultar_codigo">Consultar Código</string>
     <string name="eliminar">Eliminar</string>
+    <string name="actualizar">Actualizar</string>
 </resources>

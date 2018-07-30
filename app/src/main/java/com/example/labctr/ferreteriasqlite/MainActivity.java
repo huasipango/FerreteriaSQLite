@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     EditText edx_codigo, edx_descripcion, edx_precio;
-    Button btn_grabar, btn_consulCodigo, btn_consulDesc, btn_eliminar;
+    Button btn_grabar, btn_consulCodigo, btn_consulDesc, btn_eliminar, btn_actualizar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         btn_consulCodigo=findViewById(R.id.bt_consulCodigo);
         btn_consulDesc=findViewById(R.id.bt_consulDesc);
         btn_eliminar=findViewById(R.id.bt_eliminar);
+        btn_actualizar=findViewById(R.id.bt_actualizar);
 
 
         btn_grabar.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +59,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_actualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actualizarDato();
+            }
+        });
+
     }
+
+
 
     private void grabarDatos() {
         AdminSqlHelper admin = new AdminSqlHelper(getApplicationContext(),
@@ -79,6 +89,32 @@ public class MainActivity extends AppCompatActivity {
         db.close();
     }
 
+    private void actualizarDato() {
+        AdminSqlHelper admin = new AdminSqlHelper(getApplicationContext(),
+                "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        String cod = edx_codigo.getText().toString();
+        String des= edx_descripcion.getText().toString();
+        String pre = edx_precio.getText().toString();
+
+        ContentValues registro = new ContentValues();
+        registro.put("codigo_art",cod);
+        registro.put("descripcion_art",des);
+        registro.put("precio_art", pre);
+
+        int update=db.update("articulo",registro,"codigo_art='"+cod+"'",null);
+
+        if (update==1) {
+            Toast.makeText(getApplicationContext(),"Update exitoso.",Toast.LENGTH_LONG).show();
+
+        }else {
+
+            Toast.makeText(getApplicationContext(),"No se completó el update exitoso.",Toast.LENGTH_LONG).show();
+
+        }
+        db.close();
+    }
 
 
     private void consultarCodigo(){

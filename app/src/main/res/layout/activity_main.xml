@@ -48,6 +48,12 @@
             android:layout_height="wrap_content"
             android:text="@string/eliminar"/>
 
+    <Button
+        android:id="@+id/bt_actualizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actualizar"/>
+
 
 
 
